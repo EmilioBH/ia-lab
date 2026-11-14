@@ -1,0 +1,26 @@
+{
+  "name": "ia-lab",
+  "type": "module",
+  "version": "0.0.1",
+  "engines": {
+    "node": ">=22.23.4"
+  },
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro",
+    "test": "vitest run",
+    "check": "astro check"
+  },
+  "dependencies": {
+    "@astrojs/vue": "^7.1.6",
+    "astro": "^7.4.12",
+    "vue": "^3.5.45"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.12",
+    "typescript": "^6.0.3",
+    "vitest": "^5.1.0"
+  }
+}
