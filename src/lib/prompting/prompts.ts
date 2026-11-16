@@ -14,21 +14,42 @@ function v1(review: Review): PromptConfig {
   };
 }
 
-// v2 · prompt de sistema: TODO Emilio.
-// Pista: mueve al "system" el rol, las reglas (qué hacer con las ambiguas) y el formato exacto.
+const SYSTEM = `Eres un clasificador de reseñas de restaurantes.
+Clasifica cada reseña como positiva, negativa o neutra.
+Reglas:
+- Si mezcla elogios y quejas de peso parecido, es neutra.
+- Si usa ironía o sarcasmo, clasifica lo que quiere decir de verdad, no las palabras literales.
+- Si solo describe hechos sin opinar, es neutra.
+Formato de respuesta, exactamente dos líneas:
+1. La etiqueta en minúsculas, sin nada más.
+2. Un motivo de 10 palabras como máximo.`;
+
+// v2 · prompt de sistema: rol, reglas y formato fuera del mensaje del usuario.
 function v2(review: Review): PromptConfig {
   return {
-    system: 'TODO',
+    system: SYSTEM,
     prompt: `Reseña: "${review.texto}"`,
   };
 }
 
-// v3 · few-shot: TODO Emilio.
-// Pista: igual que v2, pero añade 3 ejemplos resueltos (uno de cada etiqueta).
-// No uses reseñas de la lista de prueba como ejemplos, o estarás haciendo trampa.
+// v3 · few-shot: el mismo system más 3 ejemplos resueltos (no están en la lista de prueba).
+const EJEMPLOS = `Ejemplos:
+
+Reseña: "El pulpo, en su punto, y nos invitaron al chupito. Un acierto."
+positiva
+Pulpo excelente y trato generoso.
+
+Reseña: "Nos cobraron dos veces el pan y el camarero se rió cuando lo dijimos."
+negativa
+Cobro indebido y trato desagradable.
+
+Reseña: "Postres caseros riquísimos, aunque el primer plato llegó tibio."
+neutra
+Postres buenos, primer plato flojo; balance equilibrado.`;
+
 function v3(review: Review): PromptConfig {
   return {
-    system: 'TODO',
+    system: `${SYSTEM}\n\n${EJEMPLOS}`,
     prompt: `Reseña: "${review.texto}"`,
   };
 }
